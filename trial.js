@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
     res.send('Hello there')
 })
 
-app.post('/api/products', async (req, res) => {
+app.post('/product', async (req, res) => {
     try {
         const product = await Product.create(req.body)
         res.status(200).json(product)
@@ -20,16 +20,13 @@ app.post('/api/products', async (req, res) => {
     }
 })
 
-
-// connecting to the database
-mongoose.connect('mongodb+srv://ddryn970:NodeApi@nodeapi.yijbrxa.mongodb.net/Node-API?retryWrites=true&w=majority&appName=NodeApi')
+mongoose.connect('timedconnection')
 .then(() => {
-    console.log('Connected to the database!')
+    console.log('connected to the DB')
 
-    // server configurations
-app.listen(PORT, ()=> {
-    console.log(`Server listening on port ${PORT}...`)
-})
+    app.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}...`)
+    })
 })
 .catch(() => {
     console.log('connection failed!')

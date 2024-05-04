@@ -7,8 +7,13 @@ const app = express()
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
-    res.send('Hello there')
+app.get('/api/products', async (req, res) => {
+    try {
+        const products = await Product.find({})
+        res.status(200).json(products)
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
 })
 
 app.post('/api/products', async (req, res) => {
@@ -19,7 +24,6 @@ app.post('/api/products', async (req, res) => {
         res.status(500).json({message: error.message})
     }
 })
-
 
 // connecting to the database
 mongoose.connect('mongodb+srv://ddryn970:NodeApi@nodeapi.yijbrxa.mongodb.net/Node-API?retryWrites=true&w=majority&appName=NodeApi')
@@ -32,5 +36,5 @@ app.listen(PORT, ()=> {
 })
 })
 .catch(() => {
-    console.log('connection failed!')
+    console.log('DB connection failed!')
 })

@@ -53,6 +53,8 @@ app.put('/api/product/:id', async (req, res) => {  // get and post (req.params a
 	}
 })
 
+// 
+
 mongoose.connect('')
 .then(() => {
 	console.log('connected to the db!')
